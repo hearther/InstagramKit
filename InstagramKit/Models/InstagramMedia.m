@@ -57,7 +57,8 @@
 @property (nonatomic, assign) CGSize lowResolutionVideoFrameSize;
 @property (nonatomic, strong) NSURL *standardResolutionVideoURL;
 @property (nonatomic, assign) CGSize standardResolutionVideoFrameSize;
-
+@property (nonatomic, assign) BOOL isCarousel;
+@property (nonatomic, strong) NSMutableArray *carouselInfo;
 @end
 
 @implementation InstagramMedia
@@ -119,6 +120,11 @@
         if (self.isVideo) {
             [self initializeVideos:info[kVideos]];
         }
+        
+        self.isCarousel = [mediaType isEqualToString:[NSString stringWithFormat:@"%@",kMediaTypeCarousel]];
+        if (self.isCarousel) {
+            [self initializeCarousel:info[kCarouselMedia]];
+        }
     }
     return self;
 }
@@ -147,6 +153,51 @@
     NSDictionary *standardResInfo = videosInfo[kStandardResolution];
     self.standardResolutionVideoURL = IKNotNull(standardResInfo[kURL])? [[NSURL alloc] initWithString:standardResInfo[kURL]] : nil;
     self.standardResolutionVideoFrameSize = CGSizeMake([standardResInfo[kWidth] floatValue], [standardResInfo[kHeight] floatValue]);
+}
+
+- (void)initializeCarousel:(NSArray *)carouselInfos
+{
+    NSMutableArray *carouselInfoArr = [[NSMutableArray alloc] init];
+    for (NSDictionary *info in carouselInfos)
+    {
+        NSMutableDictionary *retInfo = [[NSMutableDictionary alloc] init];
+        NSString *mediaType = info[kType];
+        if (mediaType){
+            retInfo[kCarouselMediaType] = mediaType;
+            if ([mediaType isEqualToString:[NSString stringWithFormat:@"%@",kMediaTypeImage]])
+            {
+                NSDictionary *imageInfo = info[kImages];
+                NSDictionary *standardResInfo = imageInfo[kStandardResolution];
+                if (IKNotNull(standardResInfo[kURL])){
+                    retInfo[kCarouselMediaStandardResolutionURL] = [[NSURL alloc] initWithString:standardResInfo[kURL]];
+                }
+            }
+            else if ([mediaType isEqualToString:[NSString stringWithFormat:@"%@",kMediaTypeVideo]])
+            {
+                NSDictionary *videoInfo = info[kVideos];
+                NSDictionary *standardResInfo = videoInfo[kStandardResolution];
+                if (IKNotNull(standardResInfo[kURL])){
+                    retInfo[kCarouselMediaStandardResolutionURL] = [[NSURL alloc] initWithString:standardResInfo[kURL]];
+                }
+            }
+        }
+        if ([retInfo count] > 0){
+            [carouselInfoArr addObject:retInfo];
+        }
+    }
+    if ([carouselInfoArr count] >0){
+        self.carouselInfo = carouselInfoArr;
+    }
+    
+//    NSString *const kCarouselMediaType = @"CarouselMediaType";
+    NSString *const kCarouselMediaStandardResolutionURL = @"CarouselMediaStandardResolutionURL";
+//    NSDictionary *lowResInfo = carouselInfo[kLowResolution];
+//    self.lowResolutionVideoURL = IKNotNull(lowResInfo[kURL]) ? [[NSURL alloc] initWithString:lowResInfo[kURL]] : nil;
+//    self.lowResolutionVideoFrameSize = CGSizeMake([lowResInfo[kWidth] floatValue], [lowResInfo[kHeight] floatValue]);
+//
+//    NSDictionary *standardResInfo = videosInfo[kStandardResolution];
+//    self.standardResolutionVideoURL = IKNotNull(standardResInfo[kURL])? [[NSURL alloc] initWithString:standardResInfo[kURL]] : nil;
+//    self.standardResolutionVideoFrameSize = CGSizeMake([standardResInfo[kWidth] floatValue], [standardResInfo[kHeight] floatValue]);
 }
 
 #pragma Getters 

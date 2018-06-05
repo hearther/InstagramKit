@@ -162,6 +162,9 @@ NS_ASSUME_NONNULL_BEGIN
  */
 @property (nonatomic, readonly) CGSize standardResolutionVideoFrameSize;
 
+@property (nonatomic, readonly) BOOL isCarousel;
+@property (nonatomic, readonly) NSArray *carouselInfo;
+
 /**
  *  Comparing InstagramMedia objects.
  *  @param media    An InstagramMedia object.

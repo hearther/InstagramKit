@@ -33,6 +33,7 @@ NSString *const kStandardResolution = @"standard_resolution";
 
 NSString *const kMediaTypeImage = @"image";
 NSString *const kMediaTypeVideo = @"video";
+NSString *const kMediaTypeCarousel = @"carousel";
 
 NSString *const kUser = @"user";
 NSString *const kUserHasLiked = @"user_has_liked";
@@ -46,6 +47,7 @@ NSString *const kFilter = @"filter";
 NSString *const kTags = @"tags";
 NSString *const kImages = @"images";
 NSString *const kVideos = @"videos";
+NSString *const kCarouselMedia = @"carousel_media";
 NSString *const kLocation = @"location";
 NSString *const kType = @"type";
 
@@ -87,6 +89,9 @@ NSString *const kMaxId = @"max_id";
 NSString *const kMaxLikeId = @"max_like_id";
 NSString *const kMaxTagId = @"max_tag_id";
 NSString *const kCursor = @"cursor";
+
+NSString *const kCarouselMediaType = @"CarouselMediaType";
+NSString *const kCarouselMediaStandardResolutionURL = @"CarouselMediaStandardResolutionURL";
 
 @interface InstagramModel ()
 

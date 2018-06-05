@@ -39,6 +39,8 @@ INSTAGRAMKIT_EXTERN NSString *const kStandardResolution;
 
 INSTAGRAMKIT_EXTERN NSString *const kMediaTypeImage;
 INSTAGRAMKIT_EXTERN NSString *const kMediaTypeVideo;
+INSTAGRAMKIT_EXTERN NSString *const kMediaTypeCarousel;
+
 
 INSTAGRAMKIT_EXTERN NSString *const kUser;
 INSTAGRAMKIT_EXTERN NSString *const kUserHasLiked;
@@ -53,6 +55,7 @@ INSTAGRAMKIT_EXTERN NSString *const kFilter;
 INSTAGRAMKIT_EXTERN NSString *const kTags;
 INSTAGRAMKIT_EXTERN NSString *const kImages;
 INSTAGRAMKIT_EXTERN NSString *const kVideos;
+INSTAGRAMKIT_EXTERN NSString *const kCarouselMedia;
 INSTAGRAMKIT_EXTERN NSString *const kLocation;
 INSTAGRAMKIT_EXTERN NSString *const kType;
 
@@ -83,6 +86,10 @@ INSTAGRAMKIT_EXTERN NSString *const kTagName;
 INSTAGRAMKIT_EXTERN NSString *const kLocationLatitude;
 INSTAGRAMKIT_EXTERN NSString *const kLocationLongitude;
 INSTAGRAMKIT_EXTERN NSString *const kLocationName;
+
+INSTAGRAMKIT_EXTERN NSString *const kCarouselMediaType;
+INSTAGRAMKIT_EXTERN NSString *const kCarouselMediaStandardResolutionURL;
+
 
 @interface InstagramModel : NSObject <NSCopying, NSSecureCoding, NSObject>
 
